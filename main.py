@@ -13,7 +13,7 @@ if __name__ == "__main__":
     threads = []
     try:
         for i in range(args.riders):
-            courier = Courier(i, 'RiderLocationStream')
+            courier = Courier(i, 'rider-location-stream')
             couriers.append(courier)
             thread = Thread(target=courier.run)
             threads.append(thread)

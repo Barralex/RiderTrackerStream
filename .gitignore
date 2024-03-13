@@ -1,3 +1,10 @@
 venv
 __pycache__
 .idea
+
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*

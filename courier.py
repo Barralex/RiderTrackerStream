@@ -1,6 +1,8 @@
 import time
 import random
 from kinesis import KinesisHandler
+from botocore.exceptions import BotoCoreError, ClientError
+
 
 class Courier:
     def __init__(self, device_id, stream_name):
@@ -36,7 +38,13 @@ class Courier:
                     "long": self.location[1],
                     "timestamp": int(time.time())
                 }
-                self.kinesis_handler.send_message(data, 0)
+
+                try:
+                    self.kinesis_handler.send_message(data, "0")
+                except ClientError as e:
+                    print(f"ClientError in thread {self.device_id}: {e}")
+                except BotoCoreError as e:
+                    print(f"BotoCoreError in thread {self.device_id}: {e}")
 
                 url = f"https://www.google.com/maps/search/?api=1&query={self.location[0]},{self.location[1]}"
                 print(f"{self.device_id} = {self.location[0]}, {self.location[1]} -> {url}")
