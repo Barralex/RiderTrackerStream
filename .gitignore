@@ -8,3 +8,6 @@ __pycache__
 # .tfstate files
 *.tfstate
 *.tfstate.*
+
+# *_lambda.zip
+/terraform/modules/stream_processing/lambdas/outputs/*
