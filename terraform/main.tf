@@ -1,5 +1,6 @@
 provider "aws" {
-  region = "us-east-1"
+  region  = "us-east-1"
+  profile = "realtime_rider_tracker_profile"
 }
 
 module "stream_processing" {

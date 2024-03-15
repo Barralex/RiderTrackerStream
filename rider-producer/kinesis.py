@@ -5,7 +5,7 @@ import json
 class KinesisHandler:
     def __init__(self, stream_name):
         self.stream_name = stream_name
-        self.client = boto3.client('kinesis', region_name='us-east-1')
+        self.client = boto3.Session(profile_name='realtime_rider_tracker_profile').client('kinesis', region_name='us-east-1')
 
     def send_message(self, data, partition_key):
         try:
