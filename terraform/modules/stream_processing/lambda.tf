@@ -1,8 +1,8 @@
-# Lambda Function
+# rider_location_processor Lambda Function
 resource "aws_lambda_function" "rider_location_processor" {
-  function_name    = var.lambda_function_name
-  handler          = var.lambda_handler
-  runtime          = var.lambda_runtime
+  function_name    = "RiderLocationProcessor"
+  handler          = "aggregator_lambda.lambda_handler"
+  runtime          = "python3.8"
   role             = aws_iam_role.lambda_exec_role.arn
   filename         = data.archive_file.aggregator_lambda.output_path
   source_code_hash = filebase64sha256(data.archive_file.aggregator_lambda.output_path)
@@ -33,9 +33,15 @@ resource "aws_lambda_function_event_invoke_config" "lambda_invoke_config" {
   }
 }
 
-# Data block for archiving Lambda function - Packages the Lambda function code into a ZIP file for deployment.
+
 data "archive_file" "aggregator_lambda" {
   type        = "zip"
   source_file = "${path.module}/lambdas/aggregator_lambda.py"
   output_path = "${path.module}/lambdas/outputs/aggregator_lambda.zip"
+}
+
+data "archive_file" "live_data_display_lambda" {
+  type        = "zip"
+  source_file = "${path.module}/lambdas/live_data_display.py"
+  output_path = "${path.module}/lambdas/outputs/live_data_display.zip"
 }

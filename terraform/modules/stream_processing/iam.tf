@@ -1,6 +1,6 @@
 # IAM Role for Lambda
 resource "aws_iam_role" "lambda_exec_role" {
-  name = "${var.lambda_function_name}_exec_role"
+  name = "rider_location_processor_exec_role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -24,7 +24,7 @@ resource "aws_iam_role" "lambda_exec_role" {
 
 # IAM Role Policy for Lambda
 resource "aws_iam_role_policy" "lambda_policy" {
-  name = "${var.lambda_function_name}_policy"
+  name = "rider_location_processor_policy"
   role = aws_iam_role.lambda_exec_role.id
 
   policy = jsonencode({

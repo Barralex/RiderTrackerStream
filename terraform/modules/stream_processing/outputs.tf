@@ -9,3 +9,7 @@ output "sns_topic_arn" {
 output "lambda_function_name" {
   value = aws_lambda_function.rider_location_processor.function_name
 }
+
+output "server_public_dns" {
+  value = "http://${aws_eip.ip.public_dns}"
+}
