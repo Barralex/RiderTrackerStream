@@ -8,6 +8,12 @@ resource "aws_lambda_function" "rider_location_processor" {
   source_code_hash = filebase64sha256(data.archive_file.aggregator_lambda.output_path)
   timeout          = 5
 
+  environment {
+    variables = {
+      SNS_TOPIC_ARN = aws_sns_topic.rider_location_updates_topic.arn
+    }
+  }
+
   tags = {
     Environment = var.environment
     Project     = var.project
