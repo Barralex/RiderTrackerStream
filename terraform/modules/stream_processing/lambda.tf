@@ -39,9 +39,3 @@ data "archive_file" "aggregator_lambda" {
   source_file = "${path.module}/lambdas/aggregator_lambda.py"
   output_path = "${path.module}/lambdas/outputs/aggregator_lambda.zip"
 }
-
-data "archive_file" "live_data_display_lambda" {
-  type        = "zip"
-  source_file = "${path.module}/lambdas/live_data_display.py"
-  output_path = "${path.module}/lambdas/outputs/live_data_display.zip"
-}
